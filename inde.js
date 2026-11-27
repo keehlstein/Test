@@ -132,7 +132,6 @@ async function refreshKpis() {
 
   Object.entries(data.kpis || {}).forEach(([key, kpi]) => {
     const pctEl = document.getElementById(`pct-${key}`);
-    const metaEl = document.getElementById(`meta-${key}`);
     const stEl = document.getElementById(`status-${key}`);
     const accentEl = document.getElementById(`accent-${key}`);
     const gaugeEl = document.getElementById(`gauge-${key}`);
@@ -156,26 +155,6 @@ async function refreshKpis() {
         gaugeEl.className = "gauge-fill na";
         gaugeEl.style.width = "0%";
       }
-    }
-
-    if (kpi.total !== null && kpi.total !== undefined) {
-      metaEl.innerHTML =
-        `total: <span id="num-total-${key}">0</span><br/>` +
-        `${kpi.sub_label}: <span id="num-sub-${key}">0</span>`;
-      animateNumber(
-        document.getElementById(`num-total-${key}`),
-        Number(kpi.total),
-        (v) => Math.round(v).toString(),
-        `total-${key}`
-      );
-      animateNumber(
-        document.getElementById(`num-sub-${key}`),
-        Number(kpi.sub_value || 0),
-        (v) => Math.round(v).toString(),
-        `sub-${key}`
-      );
-    } else {
-      metaEl.innerHTML = "";
     }
 
     if (stEl) {
