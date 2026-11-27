@@ -3,9 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>GCL Data Management KPI's - BCBS239 Critical Data</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="static/style.css" />
 </head>
 <body>
@@ -52,31 +49,35 @@
 
           <div class="kpi-card" id="card-smvd">
             <div class="kpi-top-accent" id="accent-smvd"></div>
-            <div class="kpi-name">Senior Management Missing Validation</div>
-            <div class="kpi-desc">% of BCBS239 Critical Data without Senior Management Validation</div>
-            <div class="kpi-pct" id="pct-smvd">--,--%</div>
-            <div class="kpi-gauge">
-              <div class="gauge-labels"><span>0%</span><span>100%</span></div>
-              <div class="gauge-track"><div class="gauge-fill" id="gauge-smvd"></div></div>
+            <div>
+              <div class="kpi-name">Senior Management Missing Validation</div>
+              <div class="kpi-desc">% of BCBS239 Critical Data without Senior Management Validation</div>
+              <div class="kpi-pct" id="pct-smvd">--,--%</div>
+              <div class="kpi-gauge">
+                <div class="gauge-labels"><span>0%</span><span>100%</span></div>
+                <div class="gauge-track"><div class="gauge-fill" id="gauge-smvd"></div></div>
+              </div>
             </div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-smvd">-</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">+0.0%</div></div>
+              <div class="foot-item"><span class="foot-lbl">Status</span><span class="foot-val status-pill" id="status-smvd">-</span></div>
+              <div class="foot-item"><span class="foot-lbl">vs Q-1</span><span class="foot-val trend-val">+0.0%</span></div>
             </div>
           </div>
 
           <div class="kpi-card" id="card-ddm">
             <div class="kpi-top-accent" id="accent-ddm"></div>
-            <div class="kpi-name">DDM Unassigned</div>
-            <div class="kpi-desc">% of BCBS239 Critical Data without a Data Domain Manager assigned</div>
-            <div class="kpi-pct" id="pct-ddm">--,--%</div>
-            <div class="kpi-gauge">
-              <div class="gauge-labels"><span>0%</span><span>100%</span></div>
-              <div class="gauge-track"><div class="gauge-fill" id="gauge-ddm"></div></div>
+            <div>
+              <div class="kpi-name">DDM Unassigned</div>
+              <div class="kpi-desc">% of BCBS239 Critical Data without a Data Domain Manager assigned</div>
+              <div class="kpi-pct" id="pct-ddm">--,--%</div>
+              <div class="kpi-gauge">
+                <div class="gauge-labels"><span>0%</span><span>100%</span></div>
+                <div class="gauge-track"><div class="gauge-fill" id="gauge-ddm"></div></div>
+              </div>
             </div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-ddm">-</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">+0.0%</div></div>
+              <div class="foot-item"><span class="foot-lbl">Status</span><span class="foot-val status-pill" id="status-ddm">-</span></div>
+              <div class="foot-item"><span class="foot-lbl">vs Q-1</span><span class="foot-val trend-val">+0.0%</span></div>
             </div>
           </div>
         </section>
@@ -96,16 +97,18 @@
 
           <div class="kpi-card" id="card-missing_dqr">
             <div class="kpi-top-accent" id="accent-missing_dqr"></div>
-            <div class="kpi-name">Missing Data Quality Rules</div>
-            <div class="kpi-desc">% of BCBS239 Critical Data without Data Quality Rules defined in the local DQR Catalog</div>
-            <div class="kpi-pct" id="pct-missing_dqr">--,--%</div>
-            <div class="kpi-gauge">
-              <div class="gauge-labels"><span>0%</span><span>100%</span></div>
-              <div class="gauge-track"><div class="gauge-fill" id="gauge-missing_dqr"></div></div>
+            <div>
+              <div class="kpi-name">Missing Data Quality Rules</div>
+              <div class="kpi-desc">% of BCBS239 Critical Data without Data Quality Rules defined in the local DQR Catalog</div>
+              <div class="kpi-pct" id="pct-missing_dqr">--,--%</div>
+              <div class="kpi-gauge">
+                <div class="gauge-labels"><span>0%</span><span>100%</span></div>
+                <div class="gauge-track"><div class="gauge-fill" id="gauge-missing_dqr"></div></div>
+              </div>
             </div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-missing_dqr">-</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">+0.0%</div></div>
+              <div class="foot-item"><span class="foot-lbl">Status</span><span class="foot-val status-pill" id="status-missing_dqr">-</span></div>
+              <div class="foot-item"><span class="foot-lbl">vs Q-1</span><span class="foot-val trend-val">+0.0%</span></div>
             </div>
           </div>
         </section>
@@ -124,46 +127,52 @@
 
           <div class="kpi-card" id="card-labelling_unassigned">
             <div class="kpi-top-accent" id="accent-labelling_unassigned"></div>
-            <div class="kpi-name">Labelling Unassigned</div>
-            <div class="kpi-desc">% of BCBS239 Critical Data with no final label assigned</div>
-            <div class="kpi-pct" id="pct-labelling_unassigned">--,--%</div>
-            <div class="kpi-gauge">
-              <div class="gauge-labels"><span>0%</span><span>100%</span></div>
-              <div class="gauge-track"><div class="gauge-fill" id="gauge-labelling_unassigned"></div></div>
+            <div>
+              <div class="kpi-name">Labelling Unassigned</div>
+              <div class="kpi-desc">% of BCBS239 Critical Data with no final label assigned</div>
+              <div class="kpi-pct" id="pct-labelling_unassigned">--,--%</div>
+              <div class="kpi-gauge">
+                <div class="gauge-labels"><span>0%</span><span>100%</span></div>
+                <div class="gauge-track"><div class="gauge-fill" id="gauge-labelling_unassigned"></div></div>
+              </div>
             </div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-labelling_unassigned">-</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">+0.0%</div></div>
+              <div class="foot-item"><span class="foot-lbl">Status</span><span class="foot-val status-pill" id="status-labelling_unassigned">-</span></div>
+              <div class="foot-item"><span class="foot-lbl">vs Q-1</span><span class="foot-val trend-val">+0.0%</span></div>
             </div>
           </div>
 
           <div class="kpi-card" id="card-missing_labelling_req">
             <div class="kpi-top-accent" id="accent-missing_labelling_req"></div>
-            <div class="kpi-name">Missing Labelling Requirements</div>
-            <div class="kpi-desc">% of BCBS239 Critical Data with no labelling Data Quality Rule defined</div>
-            <div class="kpi-pct" id="pct-missing_labelling_req">--,--%</div>
-            <div class="kpi-gauge">
-              <div class="gauge-labels"><span>0%</span><span>100%</span></div>
-              <div class="gauge-track"><div class="gauge-fill" id="gauge-missing_labelling_req"></div></div>
+            <div>
+              <div class="kpi-name">Missing Labelling Requirements</div>
+              <div class="kpi-desc">% of BCBS239 Critical Data with no labelling Data Quality Rule defined</div>
+              <div class="kpi-pct" id="pct-missing_labelling_req">--,--%</div>
+              <div class="kpi-gauge">
+                <div class="gauge-labels"><span>0%</span><span>100%</span></div>
+                <div class="gauge-track"><div class="gauge-fill" id="gauge-missing_labelling_req"></div></div>
+              </div>
             </div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-missing_labelling_req">-</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">+0.0%</div></div>
+              <div class="foot-item"><span class="foot-lbl">Status</span><span class="foot-val status-pill" id="status-missing_labelling_req">-</span></div>
+              <div class="foot-item"><span class="foot-lbl">vs Q-1</span><span class="foot-val trend-val">+0.0%</span></div>
             </div>
           </div>
 
           <div class="kpi-card" id="card-golden_not_reached">
             <div class="kpi-top-accent" id="accent-golden_not_reached"></div>
-            <div class="kpi-name">Golden Label not reached</div>
-            <div class="kpi-desc">% of BCBS239 Critical Data with a non-golden status assigned</div>
-            <div class="kpi-pct" id="pct-golden_not_reached">--,--%</div>
-            <div class="kpi-gauge">
-              <div class="gauge-labels"><span>0%</span><span>100%</span></div>
-              <div class="gauge-track"><div class="gauge-fill" id="gauge-golden_not_reached"></div></div>
+            <div>
+              <div class="kpi-name">Golden Label not reached</div>
+              <div class="kpi-desc">% of BCBS239 Critical Data with a non-golden status assigned</div>
+              <div class="kpi-pct" id="pct-golden_not_reached">--,--%</div>
+              <div class="kpi-gauge">
+                <div class="gauge-labels"><span>0%</span><span>100%</span></div>
+                <div class="gauge-track"><div class="gauge-fill" id="gauge-golden_not_reached"></div></div>
+              </div>
             </div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-golden_not_reached">-</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">+0.0%</div></div>
+              <div class="foot-item"><span class="foot-lbl">Status</span><span class="foot-val status-pill" id="status-golden_not_reached">-</span></div>
+              <div class="foot-item"><span class="foot-lbl">vs Q-1</span><span class="foot-val trend-val">+0.0%</span></div>
             </div>
           </div>
         </section>
@@ -182,16 +191,18 @@
 
           <div class="kpi-card" id="card-dqi_not_updated">
             <div class="kpi-top-accent na" id="accent-dqi_not_updated"></div>
-            <div class="kpi-name">Data Quality Issues not updated</div>
-            <div class="kpi-desc">% of issues with less than the 6 mandatory criteria updates for issues of BCBS239 Critical Data</div>
-            <div class="kpi-pct na-text" id="pct-dqi_not_updated">N/A%</div>
-            <div class="kpi-gauge">
-              <div class="gauge-labels"><span>0%</span><span>100%</span></div>
-              <div class="gauge-track"><div class="gauge-fill na" id="gauge-dqi_not_updated"></div></div>
+            <div>
+              <div class="kpi-name">Data Quality Issues not updated</div>
+              <div class="kpi-desc">% of issues with less than the 6 mandatory criteria updates for issues of BCBS239 Critical Data</div>
+              <div class="kpi-pct na-text" id="pct-dqi_not_updated">N/A%</div>
+              <div class="kpi-gauge">
+                <div class="gauge-labels"><span>0%</span><span>100%</span></div>
+                <div class="gauge-track"><div class="gauge-fill na" id="gauge-dqi_not_updated"></div></div>
+              </div>
             </div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill na" id="status-dqi_not_updated">N/A</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">N/A</div></div>
+              <div class="foot-item"><span class="foot-lbl">Status</span><span class="foot-val status-pill na" id="status-dqi_not_updated">N/A</span></div>
+              <div class="foot-item"><span class="foot-lbl">vs Q-1</span><span class="foot-val trend-val">N/A</span></div>
             </div>
           </div>
         </section>
@@ -199,37 +210,39 @@
 
       <!-- Right Sidebar: Filters + Vertical Status Summary -->
       <aside class="sidebar">
-        <div class="sidebar-title">
-          <span class="sidebar-icon metal-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="21" x2="14" y1="4" y2="4"/>
-              <line x1="10" x2="3" y1="4" y2="4"/>
-              <line x1="21" x2="12" y1="12" y2="12"/>
-              <line x1="8" x2="3" y1="12" y2="12"/>
-              <line x1="21" x2="16" y1="20" y2="20"/>
-              <line x1="12" x2="3" y1="20" y2="20"/>
-              <circle cx="12" cy="4" r="2"/>
-              <circle cx="10" cy="12" r="2"/>
-              <circle cx="14" cy="20" r="2"/>
-            </svg>
-          </span>
-          <span>Content Exploration</span>
+        <div class="sidebar-top">
+          <div class="sidebar-title">
+            <span class="sidebar-icon metal-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="21" x2="14" y1="4" y2="4"/>
+                <line x1="10" x2="3" y1="4" y2="4"/>
+                <line x1="21" x2="12" y1="12" y2="12"/>
+                <line x1="8" x2="3" y1="12" y2="12"/>
+                <line x1="21" x2="16" y1="20" y2="20"/>
+                <line x1="12" x2="3" y1="20" y2="20"/>
+                <circle cx="12" cy="4" r="2"/>
+                <circle cx="10" cy="12" r="2"/>
+                <circle cx="14" cy="20" r="2"/>
+              </svg>
+            </span>
+            <span>Content Exploration</span>
+          </div>
+
+          <label class="filter-label" for="sel-comm-type">Choose your type</label>
+          <select id="sel-comm-type" class="filter-select">
+            <option value="__ALL__">(All)</option>
+          </select>
+
+          <label class="filter-label" for="sel-community">Choose a Business Line/Region/Filière</label>
+          <select id="sel-community" class="filter-select">
+            <option value="__ALL__">(All)</option>
+          </select>
+
+          <label class="filter-label" for="sel-filiere">Filter by Filière</label>
+          <select id="sel-filiere" class="filter-select">
+            <option value="__ALL__">(Tout)</option>
+          </select>
         </div>
-
-        <label class="filter-label" for="sel-comm-type">Choose your type</label>
-        <select id="sel-comm-type" class="filter-select">
-          <option value="__ALL__">(All)</option>
-        </select>
-
-        <label class="filter-label" for="sel-community">Choose a Business Line/Region/Filière</label>
-        <select id="sel-community" class="filter-select">
-          <option value="__ALL__">(All)</option>
-        </select>
-
-        <label class="filter-label" for="sel-filiere">Filter by Filière</label>
-        <select id="sel-filiere" class="filter-select">
-          <option value="__ALL__">(Tout)</option>
-        </select>
 
         <div class="sidebar-status-stack">
           <div class="status-box box-target">
