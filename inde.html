@@ -36,7 +36,11 @@
         <!-- Col 1: Critical Data Governance -->
         <section class="kpi-col">
           <div class="col-header">
-            <div class="col-icon">🏛️</div>
+            <div class="col-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                <path d="M3 10h18M5 10v8m4-8v8m6-8v8m4-8v8M2 20h20M12 3L2 8h20L12 3z"/>
+              </svg>
+            </div>
             <div class="col-title">Critical Data<br/>Governance</div>
           </div>
 
@@ -44,7 +48,7 @@
             <div class="kpi-top-accent" id="accent-smvd"></div>
             <div class="kpi-name">Senior Management Missing Validation</div>
             <div class="kpi-desc">% of BCBS239 Critical Data without Senior Management Validation</div>
-            <div class="kpi-pct" id="pct-smvd">--,--%</div>
+            <div class="kpi-dial"><span class="kpi-pct" id="pct-smvd">--,--%</span></div>
             <div class="kpi-meta" id="meta-smvd">total: -<br/>Date defined: -</div>
             <div class="kpi-footer">
               <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-smvd">-</div></div>
@@ -56,7 +60,7 @@
             <div class="kpi-top-accent" id="accent-ddm"></div>
             <div class="kpi-name">DDM Unassigned</div>
             <div class="kpi-desc">% of BCBS239 Critical Data without a Data Domain Manager assigned</div>
-            <div class="kpi-pct" id="pct-ddm">--,--%</div>
+            <div class="kpi-dial"><span class="kpi-pct" id="pct-ddm">--,--%</span></div>
             <div class="kpi-meta" id="meta-ddm">total: -<br/>assigned: -</div>
             <div class="kpi-footer">
               <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-ddm">-</div></div>
@@ -68,7 +72,11 @@
         <!-- Col 2: Data Quality Rules Implementation -->
         <section class="kpi-col">
           <div class="col-header">
-            <div class="col-icon">📋</div>
+            <div class="col-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2M9 5h6M9 12h6M9 16h4"/>
+              </svg>
+            </div>
             <div class="col-title">Data Quality Rules<br/>Implementation</div>
           </div>
 
@@ -76,7 +84,7 @@
             <div class="kpi-top-accent" id="accent-missing_dqr"></div>
             <div class="kpi-name">Missing Data Quality Rules</div>
             <div class="kpi-desc">% of BCBS239 Critical Data without Data Quality Rules defined in the local DQR Catalog</div>
-            <div class="kpi-pct" id="pct-missing_dqr">--,--%</div>
+            <div class="kpi-dial"><span class="kpi-pct" id="pct-missing_dqr">--,--%</span></div>
             <div class="kpi-meta" id="meta-missing_dqr">total: -<br/>defined: -</div>
             <div class="kpi-footer">
               <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-missing_dqr">-</div></div>
@@ -88,7 +96,11 @@
         <!-- Col 3: Critical Data Labelling -->
         <section class="kpi-col">
           <div class="col-header">
-            <div class="col-icon">🏷️</div>
+            <div class="col-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82zM7 7h.01"/>
+              </svg>
+            </div>
             <div class="col-title">Critical Data<br/>Labelling</div>
           </div>
 
@@ -96,7 +108,7 @@
             <div class="kpi-top-accent" id="accent-labelling_unassigned"></div>
             <div class="kpi-name">Labelling Unassigned</div>
             <div class="kpi-desc">% of BCBS239 Critical Data with no final label assigned</div>
-            <div class="kpi-pct" id="pct-labelling_unassigned">--,--%</div>
+            <div class="kpi-dial"><span class="kpi-pct" id="pct-labelling_unassigned">--,--%</span></div>
             <div class="kpi-meta" id="meta-labelling_unassigned">total: -<br/>assigned: -</div>
             <div class="kpi-footer">
               <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-labelling_unassigned">-</div></div>
@@ -108,7 +120,7 @@
             <div class="kpi-top-accent" id="accent-missing_labelling_req"></div>
             <div class="kpi-name">Missing Labelling Requirements</div>
             <div class="kpi-desc">% of BCBS239 Critical Data with no labelling Data Quality Rule defined</div>
-            <div class="kpi-pct" id="pct-missing_labelling_req">--,--%</div>
+            <div class="kpi-dial"><span class="kpi-pct" id="pct-missing_labelling_req">--,--%</span></div>
             <div class="kpi-meta" id="meta-missing_labelling_req">total: -<br/>defined: -</div>
             <div class="kpi-footer">
               <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-missing_labelling_req">-</div></div>
@@ -120,7 +132,7 @@
             <div class="kpi-top-accent" id="accent-golden_not_reached"></div>
             <div class="kpi-name">Golden Label not reached</div>
             <div class="kpi-desc">% of BCBS239 Critical Data with a non-golden status assigned</div>
-            <div class="kpi-pct" id="pct-golden_not_reached">--,--%</div>
+            <div class="kpi-dial"><span class="kpi-pct" id="pct-golden_not_reached">--,--%</span></div>
             <div class="kpi-meta" id="meta-golden_not_reached">total: -<br/>Golden: -</div>
             <div class="kpi-footer">
               <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-golden_not_reached">-</div></div>
@@ -132,7 +144,11 @@
         <!-- Col 4: Data Quality Issues Register -->
         <section class="kpi-col">
           <div class="col-header">
-            <div class="col-icon">⚠️</div>
+            <div class="col-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4m0 4h.01"/>
+              </svg>
+            </div>
             <div class="col-title">Data Quality Issues<br/>Register</div>
           </div>
 
@@ -140,7 +156,7 @@
             <div class="kpi-top-accent na" id="accent-dqi_not_updated"></div>
             <div class="kpi-name">Data Quality Issues not updated</div>
             <div class="kpi-desc">% of issues with less than the 6 mandatory criteria updates for issues of BCBS239 Critical Data</div>
-            <div class="kpi-pct na-text" id="pct-dqi_not_updated">N/A%</div>
+            <div class="kpi-dial"><span class="kpi-pct na-text" id="pct-dqi_not_updated">N/A%</span></div>
             <div class="kpi-meta" id="meta-dqi_not_updated"></div>
             <div class="kpi-footer">
               <div><div class="foot-lbl">Status</div><div class="foot-val status-pill na" id="status-dqi_not_updated">N/A</div></div>
@@ -150,9 +166,14 @@
         </section>
       </div>
 
-      <!-- Right Sidebar: Content Exploration -->
+      <!-- Right Sidebar: Filters + Vertical Status Summary -->
       <aside class="sidebar">
-        <div class="sidebar-title">🎛️ Content Exploration</div>
+        <div class="sidebar-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+            <path d="M4 6h16M7 12h10M10 18h4"/>
+          </svg>
+          <span>Content Exploration</span>
+        </div>
 
         <label class="filter-label" for="sel-comm-type">Choose your type</label>
         <select id="sel-comm-type" class="filter-select">
@@ -168,35 +189,34 @@
         <select id="sel-filiere" class="filter-select">
           <option value="__ALL__">(Tout)</option>
         </select>
+
+        <div class="sidebar-status-stack">
+          <div class="status-box box-target">
+            <div>
+              <div class="box-title">ON TARGET</div>
+              <div class="box-range">0 to 5%</div>
+            </div>
+            <div class="box-count" id="count-on_target">0</div>
+          </div>
+
+          <div class="status-box box-warning">
+            <div>
+              <div class="box-title">WARNING</div>
+              <div class="box-range">6 to 10%</div>
+            </div>
+            <div class="box-count" id="count-warning">0</div>
+          </div>
+
+          <div class="status-box box-risk">
+            <div>
+              <div class="box-title">AT RISK</div>
+              <div class="box-range">&gt;10 %</div>
+            </div>
+            <div class="box-count" id="count-at_risk">0</div>
+          </div>
+        </div>
       </aside>
     </div>
-
-    <!-- Bottom Status Bar -->
-    <footer class="status-bar">
-      <div class="status-box box-target">
-        <div>
-          <div class="box-title">ON TARGET</div>
-          <div class="box-range">0 to 5%</div>
-        </div>
-        <div class="box-count" id="count-on_target">0</div>
-      </div>
-
-      <div class="status-box box-warning">
-        <div>
-          <div class="box-title">WARNING</div>
-          <div class="box-range">6 to 10%</div>
-        </div>
-        <div class="box-count" id="count-warning">0</div>
-      </div>
-
-      <div class="status-box box-risk">
-        <div>
-          <div class="box-title">AT RISK</div>
-          <div class="box-range">&gt;10 %</div>
-        </div>
-        <div class="box-count" id="count-at_risk">0</div>
-      </div>
-    </footer>
   </div>
 
   <script src="static/app.js"></script>
