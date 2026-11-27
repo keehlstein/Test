@@ -1,19 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <title>GCL Data Management KPI's - BCBS239 Critical Data</title>
   <link rel="stylesheet" href="static/style.css" />
 </head>
 <body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
   <div class="app-shell">
     <!-- Top Header -->
     <header class="top-header">
-      <div>
-        <h1>GCL Data Management KPI's - BCBS239 Critical Data</h1>
+      <div class="header-left">
+        <div class="live-pill"><span class="pulse-dot"></span> BCBS239 GOVERNANCE</div>
+        <h1>GCL Data Management KPI's <span class="title-accent">— Critical Data</span></h1>
         <p class="subtitle">Overview of the BCBS239 Critical Data application across key dimensions</p>
       </div>
-      <div class="brand-badge">GDO <span>GROUP DATA OFFICE</span></div>
+
+      <div class="header-right">
+        <button id="theme-toggle" class="theme-btn" type="button" aria-label="Toggle Dark Mode">
+          <span class="theme-icon" id="theme-icon">🌙</span>
+          <span class="theme-label" id="theme-label">Dark Mode</span>
+        </button>
+
+        <div class="brand-badge">
+          GDO
+          <span>GROUP DATA OFFICE</span>
+        </div>
+      </div>
     </header>
 
     <!-- Main Content + Right Sidebar -->
@@ -27,24 +42,26 @@
           </div>
 
           <div class="kpi-card" id="card-smvd">
+            <div class="kpi-top-accent" id="accent-smvd"></div>
             <div class="kpi-name">Senior Management Missing Validation</div>
             <div class="kpi-desc">% of BCBS239 Critical Data without Senior Management Validation</div>
             <div class="kpi-pct" id="pct-smvd">--,--%</div>
             <div class="kpi-meta" id="meta-smvd">total: -<br/>Date defined: -</div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-smvd">-</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">+0.0%</div></div>
+              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-smvd">-</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">+0.0%</div></div>
             </div>
           </div>
 
           <div class="kpi-card" id="card-ddm">
+            <div class="kpi-top-accent" id="accent-ddm"></div>
             <div class="kpi-name">DDM Unassigned</div>
             <div class="kpi-desc">% of BCBS239 Critical Data without a Data Domain Manager assigned</div>
             <div class="kpi-pct" id="pct-ddm">--,--%</div>
             <div class="kpi-meta" id="meta-ddm">total: -<br/>assigned: -</div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-ddm">-</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">+0.0%</div></div>
+              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-ddm">-</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">+0.0%</div></div>
             </div>
           </div>
         </section>
@@ -57,13 +74,14 @@
           </div>
 
           <div class="kpi-card" id="card-missing_dqr">
+            <div class="kpi-top-accent" id="accent-missing_dqr"></div>
             <div class="kpi-name">Missing Data Quality Rules</div>
             <div class="kpi-desc">% of BCBS239 Critical Data without Data Quality Rules defined in the local DQR Catalog</div>
             <div class="kpi-pct" id="pct-missing_dqr">--,--%</div>
             <div class="kpi-meta" id="meta-missing_dqr">total: -<br/>defined: -</div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-missing_dqr">-</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">+0.0%</div></div>
+              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-missing_dqr">-</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">+0.0%</div></div>
             </div>
           </div>
         </section>
@@ -76,35 +94,38 @@
           </div>
 
           <div class="kpi-card" id="card-labelling_unassigned">
+            <div class="kpi-top-accent" id="accent-labelling_unassigned"></div>
             <div class="kpi-name">Labelling Unassigned</div>
             <div class="kpi-desc">% of BCBS239 Critical Data with no final label assigned</div>
             <div class="kpi-pct" id="pct-labelling_unassigned">--,--%</div>
             <div class="kpi-meta" id="meta-labelling_unassigned">total: -<br/>assigned: -</div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-labelling_unassigned">-</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">+0.0%</div></div>
+              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-labelling_unassigned">-</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">+0.0%</div></div>
             </div>
           </div>
 
           <div class="kpi-card" id="card-missing_labelling_req">
+            <div class="kpi-top-accent" id="accent-missing_labelling_req"></div>
             <div class="kpi-name">Missing Labelling Requirements</div>
             <div class="kpi-desc">% of BCBS239 Critical Data with no labelling Data Quality Rule defined</div>
             <div class="kpi-pct" id="pct-missing_labelling_req">--,--%</div>
             <div class="kpi-meta" id="meta-missing_labelling_req">total: -<br/>defined: -</div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-missing_labelling_req">-</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">+0.0%</div></div>
+              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-missing_labelling_req">-</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">+0.0%</div></div>
             </div>
           </div>
 
           <div class="kpi-card" id="card-golden_not_reached">
+            <div class="kpi-top-accent" id="accent-golden_not_reached"></div>
             <div class="kpi-name">Golden Label not reached</div>
             <div class="kpi-desc">% of BCBS239 Critical Data with a non-golden status assigned</div>
             <div class="kpi-pct" id="pct-golden_not_reached">--,--%</div>
             <div class="kpi-meta" id="meta-golden_not_reached">total: -<br/>Golden: -</div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-golden_not_reached">-</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">+0.0%</div></div>
+              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill" id="status-golden_not_reached">-</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">+0.0%</div></div>
             </div>
           </div>
         </section>
@@ -117,13 +138,14 @@
           </div>
 
           <div class="kpi-card" id="card-dqi_not_updated">
+            <div class="kpi-top-accent na" id="accent-dqi_not_updated"></div>
             <div class="kpi-name">Data Quality Issues not updated</div>
             <div class="kpi-desc">% of issues with less than the 6 mandatory criteria updates for issues of BCBS239 Critical Data</div>
             <div class="kpi-pct na-text" id="pct-dqi_not_updated">N/A%</div>
             <div class="kpi-meta" id="meta-dqi_not_updated"></div>
             <div class="kpi-footer">
-              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-dqi_not_updated">N/A</div></div>
-              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">N/A</div></div>
+              <div><div class="foot-lbl">Status</div><div class="foot-val status-pill na" id="status-dqi_not_updated">N/A</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val trend-val">N/A</div></div>
             </div>
           </div>
         </section>
@@ -131,7 +153,7 @@
 
       <!-- Right Sidebar: Content Exploration -->
       <aside class="sidebar">
-        <div class="sidebar-title">Content Exploration</div>
+        <div class="sidebar-title">🎛️ Content Exploration</div>
 
         <label class="filter-label" for="sel-comm-type">Choose your type</label>
         <select id="sel-comm-type" class="filter-select">
