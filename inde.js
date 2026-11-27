@@ -2,22 +2,52 @@ const selType = document.getElementById("sel-comm-type");
 const selComm = document.getElementById("sel-community");
 const selFil = document.getElementById("sel-filiere");
 
+const themeToggleBtn = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
+const themeLabel = document.getElementById("theme-label");
+
 const ANIM_DURATION = 550;
 const animFrames = new Map();
 
+/* --- Gestion du thème Dark / Light --- */
+function applyTheme(theme) {
+  const isDark = theme === "dark";
+  document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+  if (themeIcon) themeIcon.textContent = isDark ? "☀️" : "🌙";
+  if (themeLabel) themeLabel.textContent = isDark ? "Light Mode" : "Dark Mode";
+  try {
+    localStorage.setItem("gcl_dashboard_theme", isDark ? "dark" : "light");
+  } catch (e) {}
+}
+
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme");
+    applyTheme(current === "dark" ? "light" : "dark");
+  });
+}
+
+try {
+  const savedTheme = localStorage.getItem("gcl_dashboard_theme");
+  if (savedTheme === "dark" || savedTheme === "light") {
+    applyTheme(savedTheme);
+  }
+} catch (e) {}
+
+/* --- Utilitaires & API --- */
 function showDebug(msg, isError = true) {
   let box = document.getElementById("webapp-debug-box");
   if (!box) {
     box = document.createElement("div");
     box.id = "webapp-debug-box";
     box.style.cssText =
-      "padding:8px 12px;border-radius:6px;margin-bottom:12px;font-size:12px;font-family:monospace;";
+      "padding:8px 12px;border-radius:10px;margin-bottom:12px;font-size:12px;font-family:monospace;";
     const shell = document.querySelector(".app-shell");
     if (shell) shell.prepend(box);
   }
-  box.style.background = isError ? "#fdecea" : "#eef6ff";
-  box.style.color = isError ? "#8a1c1c" : "#164273";
-  box.style.border = isError ? "1px solid #f5c2c7" : "1px solid #b6d4fe";
+  box.style.background = isError ? "rgba(239, 68, 68, 0.14)" : "rgba(59, 130, 246, 0.14)";
+  box.style.color = isError ? "#ef4444" : "#3b82f6";
+  box.style.border = isError ? "1px solid rgba(239, 68, 68, 0.35)" : "1px solid rgba(59, 130, 246, 0.35)";
   box.textContent = msg;
 }
 
@@ -126,9 +156,11 @@ async function refreshKpis() {
     const pctEl = document.getElementById(`pct-${key}`);
     const metaEl = document.getElementById(`meta-${key}`);
     const stEl = document.getElementById(`status-${key}`);
+    const accentEl = document.getElementById(`accent-${key}`);
     if (!pctEl) return;
 
     pctEl.className = `kpi-pct ${kpi.status || ""}`;
+    if (accentEl) accentEl.className = `kpi-top-accent ${kpi.status || ""}`;
 
     if (kpi.pct !== null && kpi.pct !== undefined && !Number.isNaN(Number(kpi.pct))) {
       animateNumber(pctEl, Number(kpi.pct), formatFrenchPct, `pct-${key}`);
@@ -157,6 +189,7 @@ async function refreshKpis() {
     }
 
     if (stEl) {
+      stEl.className = `foot-val status-pill ${kpi.status || ""}`;
       stEl.textContent = renderStatusText(kpi.status);
     }
   });
