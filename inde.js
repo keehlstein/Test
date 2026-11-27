@@ -33,22 +33,6 @@ try {
   }
 } catch (e) {}
 
-function showDebug(msg, isError = true) {
-  let box = document.getElementById("webapp-debug-box");
-  if (!box) {
-    box = document.createElement("div");
-    box.id = "webapp-debug-box";
-    box.style.cssText =
-      "padding:8px 12px;border-radius:10px;margin-bottom:12px;font-size:12px;font-family:monospace;";
-    const shell = document.querySelector(".app-shell");
-    if (shell) shell.prepend(box);
-  }
-  box.style.background = isError ? "rgba(239, 68, 68, 0.14)" : "rgba(59, 130, 246, 0.14)";
-  box.style.color = isError ? "#ef4444" : "#3b82f6";
-  box.style.border = isError ? "1px solid rgba(239, 68, 68, 0.35)" : "1px solid rgba(59, 130, 246, 0.35)";
-  box.textContent = msg;
-}
-
 function buildBackendUrl(path) {
   const cleanPath = path.startsWith("/") ? path.slice(1) : path;
   if (window.dataiku && typeof dataiku.getWebAppBackendUrl === "function") {
@@ -68,11 +52,7 @@ async function fetchJson(path) {
   if (!res.ok) {
     throw new Error(`HTTP ${res.status} (${url}) : ${text.slice(0, 200)}`);
   }
-  try {
-    return JSON.parse(text);
-  } catch (e) {
-    throw new Error(`Réponse non-JSON (${url}) : ${text.slice(0, 200)}`);
-  }
+  return JSON.parse(text);
 }
 
 function fillSelect(selectEl, values, defaultLabel, keepValue = null) {
@@ -206,45 +186,25 @@ async function refreshKpis() {
 }
 
 selType.addEventListener("change", async () => {
-  try {
-    await refreshFilters(true);
-    await refreshKpis();
-  } catch (e) {
-    showDebug(e.message, true);
-  }
+  await refreshFilters(true);
+  await refreshKpis();
 });
 
 selComm.addEventListener("change", async () => {
-  try {
-    await refreshFilters(false);
-    await refreshKpis();
-  } catch (e) {
-    showDebug(e.message, true);
-  }
+  await refreshFilters(false);
+  await refreshKpis();
 });
 
 selFil.addEventListener("change", async () => {
-  try {
-    await refreshKpis();
-  } catch (e) {
-    showDebug(e.message, true);
-  }
+  await refreshKpis();
 });
 
 (async function init() {
   const logoEl = document.getElementById("gdo-logo");
   if (logoEl) logoEl.src = buildBackendUrl("api/logo");
 
-  try {
-    const fData = await fetchJson("api/filters");
-    fillSelect(selType, fData.community_types, "(All)", "Business Line");
-    await refreshFilters(true);
-    await refreshKpis();
-    showDebug(
-      `Connecté : ${(fData.community_types || []).length} types, ${(fData.communities || []).length} communautés.`,
-      false
-    );
-  } catch (e) {
-    showDebug(`Erreur au chargement : ${e.message}`, true);
-  }
+  const fData = await fetchJson("api/filters");
+  fillSelect(selType, fData.community_types, "(All)", "Business Line");
+  await refreshFilters(true);
+  await refreshKpis();
 })();
