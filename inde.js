@@ -207,7 +207,7 @@ selFil.addEventListener("change", async () => {
     await refreshFilters(true);
     await refreshKpis();
     showDebug(
-      `Connecté : ${ (fData.community_types || []).length } types, ${ (fData.communities || []).length } communautés.`,
+      `Connecté : ${(fData.community_types || []).length} types, ${(fData.communities || []).length} communautés.`,
       false
     );
   } catch (e) {
