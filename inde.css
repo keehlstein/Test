@@ -245,16 +245,17 @@ body {
   align-items: stretch;
 }
 
+/* Chaque colonne a 1 header + 3 emplacements égaux pour garantir une taille identique à chaque carte KPI */
 .kpi-col {
-  display: flex;
-  flex-direction: column;
+  height: 100%;
   min-height: 0;
   min-width: 0;
+  display: grid;
+  grid-template-rows: auto repeat(3, minmax(0, 1fr));
   gap: clamp(6px, 0.8vh, 9px);
 }
 
 .col-header {
-  flex-shrink: 0;
   background: var(--bg-col-head);
   backdrop-filter: blur(10px);
   padding: clamp(6px, 0.8vh, 9px) 10px;
@@ -287,11 +288,12 @@ body {
   line-height: 1.2;
 }
 
-/* Cartes KPI compactées pour tenir sans scroll */
+/* Toutes les cartes KPI ont exactement la même taille */
 .kpi-card {
   position: relative;
   overflow: hidden;
-  flex: 1 1 0;
+  width: 100%;
+  height: 100%;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -446,124 +448,3 @@ body {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background: var(--bg-sidebar);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  padding: clamp(10px, 1.3vh, 14px);
-  box-shadow: var(--shadow-card);
-  min-width: 0;
-  overflow: hidden;
-}
-
-.sidebar-top {
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebar-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13.5px;
-  font-weight: 800;
-  color: var(--text-main);
-  margin-bottom: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.sidebar-icon {
-  width: 26px;
-  height: 26px;
-  border-radius: 7px;
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-}
-
-.sidebar-icon svg {
-  width: 14px;
-  height: 14px;
-}
-
-.filter-label {
-  display: block;
-  font-size: 10.5px;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-  margin-top: 7px;
-}
-
-.filter-select {
-  width: 100%;
-  padding: 6px 8px;
-  border: 1px solid var(--border-subtle);
-  border-radius: 8px;
-  background: var(--bg-input);
-  color: var(--text-main);
-  font-size: 11.5px;
-  font-weight: 600;
-  outline: none;
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-}
-
-.filter-select:hover,
-.filter-select:focus {
-  border-color: var(--accent-brand);
-}
-
-.sidebar-status-stack {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(6px, 0.8vh, 9px);
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border-subtle);
-}
-
-.status-box {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
-  padding: clamp(7px, 0.9vh, 10px) 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-left: 4px solid #94a3b8;
-  box-shadow: var(--shadow-card);
-}
-
-.box-target { border-left-color: var(--c-target); }
-.box-warning { border-left-color: var(--c-warning); }
-.box-risk { border-left-color: var(--c-risk); }
-
-.box-title {
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: var(--text-main);
-}
-
-.box-range {
-  font-size: 10px;
-  color: var(--text-muted);
-  margin-top: 1px;
-}
-
-.box-count {
-  font-family: "Chakra Petch", "Bahnschrift", "Arial Narrow", sans-serif;
-  font-style: italic;
-  font-size: clamp(17px, 2vh, 21px);
-  font-weight: 700;
-  padding: 1px 8px;
-  border-radius: 7px;
-}
-
-.box-target .box-count { color: var(--c-target); background: var(--c-target-bg); }
-.box-warning .box-count { color: var(--c-warning); background: var(--c-warning-bg); }
-.box-risk .box-count { color: var(--c-risk); background: var(--c-risk-bg); }
