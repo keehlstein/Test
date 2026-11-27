@@ -2,16 +2,13 @@ import dataiku
 import pandas as pd
 from flask import request, jsonify, Response
 
-# Chargement de la dataset gcl_data depuis le flow Dataiku
 dataset = dataiku.Dataset("gcl_data")
 df_raw = dataset.get_dataframe()
 
-# Folder et fichier logo GDO formaté
 LOGO_FOLDER_ID = "oJeEdZgy"
 LOGO_FILENAME = "logo_gdo_formatted.png"
 LOGO_MIMETYPE = "image/png"
 
-# Noms des colonnes de gcl_data (à adapter si besoin)
 COLS = {
     "asset_id": "asset_id",
     "comm_type": "Community type",
@@ -27,7 +24,6 @@ COLS = {
 
 
 def get_col(df: pd.DataFrame, key: str):
-    """Récupère une colonne en toute sécurité même si le nom n'existe pas."""
     col_name = COLS.get(key)
     if col_name and col_name in df.columns:
         return df[col_name]
@@ -35,14 +31,12 @@ def get_col(df: pd.DataFrame, key: str):
 
 
 def is_true_series(s: pd.Series) -> pd.Series:
-    """Renvoie True uniquement quand la valeur représente 'True' (booléen, texte ou 1)."""
     if s.dtype == bool:
         return s.fillna(False)
     return s.astype(str).str.strip().str.lower().isin(["true", "1", "yes"])
 
 
 def series_true_or_false(df: pd.DataFrame, key: str) -> pd.Series:
-    """Retourne une série booléenne indexée sur df, ou False partout si colonne absente."""
     s = get_col(df, key)
     if s is None:
         return pd.Series(False, index=df.index)
@@ -50,7 +44,6 @@ def series_true_or_false(df: pd.DataFrame, key: str) -> pd.Series:
 
 
 def nunique_assets(df: pd.DataFrame) -> int:
-    """Compte le nombre d'asset_id distincts (hors valeurs nulles)."""
     s = get_col(df, "asset_id")
     if df.empty or s is None:
         return 0
@@ -58,13 +51,6 @@ def nunique_assets(df: pd.DataFrame) -> int:
 
 
 def compute_kpi(df_scope: pd.DataFrame, df_flag_true: pd.DataFrame, label: str, sub_label: str):
-    """
-    Calcule :
-      total = count distinct asset_id sur df_scope
-      ok_count = count distinct asset_id où le flag / condition est True
-      missing_count = total - ok_count
-      pct = (missing_count / total) * 100
-    """
     total = nunique_assets(df_scope)
     if total == 0:
         return {
@@ -81,7 +67,6 @@ def compute_kpi(df_scope: pd.DataFrame, df_flag_true: pd.DataFrame, label: str, 
     missing_count = max(total - ok_count, 0)
     pct = (missing_count / total) * 100.0
 
-    # Seuils de statut : On Target (0-5%), Warning (6-10%), At Risk (>10%)
     if pct <= 5.0:
         status = "on_target"
     elif pct <= 10.0:
@@ -102,7 +87,6 @@ def compute_kpi(df_scope: pd.DataFrame, df_flag_true: pd.DataFrame, label: str, 
 
 @app.route("/api/logo", methods=["GET"])
 def get_logo():
-    """Sert l'image du logo GDO depuis le Managed Folder Dataiku."""
     try:
         folder = dataiku.Folder(LOGO_FOLDER_ID)
         with folder.get_download_stream(LOGO_FILENAME) as f:
@@ -114,7 +98,6 @@ def get_logo():
 
 @app.route("/api/filters", methods=["GET"])
 def get_filters():
-    """Retourne les valeurs possibles des 3 filtres en fonction de la sélection."""
     df = df_raw.copy()
     comm_type = request.args.get("comm_type", "")
     community = request.args.get("community", "")
@@ -145,7 +128,6 @@ def get_filters():
 
 @app.route("/api/kpis", methods=["GET"])
 def get_kpis():
-    """Calcule tous les KPIs après application des filtres sélectionnés."""
     df = df_raw.copy()
     comm_type = request.args.get("comm_type", "")
     community = request.args.get("community", "")
@@ -158,10 +140,8 @@ def get_kpis():
     if filiere and filiere != "__ALL__" and get_col(df, "filiere") is not None:
         df = df[get_col(df, "filiere") == filiere]
 
-    # Périmètre global filtré
     df_global = df
 
-    # Périmètre labellisation : uniquement Applicability Labes == True
     if get_col(df, "app_label_flag") is not None:
         df_label_scope = df[series_true_or_false(df, "app_label_flag")]
     else:
