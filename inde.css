@@ -65,7 +65,6 @@ body {
   position: relative;
 }
 
-/* Halo lumineux d'arrière-plan */
 .bg-orb {
   position: fixed;
   border-radius: 50%;
@@ -99,7 +98,6 @@ body {
   padding: 18px 22px;
 }
 
-/* Header */
 .top-header {
   display: flex;
   justify-content: space-between;
@@ -170,7 +168,6 @@ body {
   gap: 18px;
 }
 
-/* Bouton Dark/Light Mode */
 .theme-btn {
   display: inline-flex;
   align-items: center;
@@ -206,25 +203,23 @@ body {
   transform: rotate(22deg);
 }
 
-.brand-badge {
-  font-size: 24px;
-  font-weight: 900;
-  color: var(--text-main);
-  letter-spacing: 1.5px;
-  text-align: right;
-  line-height: 1;
+.brand-logo-wrap {
+  display: flex;
+  align-items: center;
 }
 
-.brand-badge span {
-  display: block;
-  font-size: 8px;
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
-  margin-top: 3px;
+.brand-logo-img {
+  max-height: 44px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  transition: transform 0.25s ease;
 }
 
-/* Grille principale */
+.brand-logo-img:hover {
+  transform: scale(1.03);
+}
+
 .main-layout {
   display: grid;
   grid-template-columns: 1fr 275px;
@@ -268,7 +263,6 @@ body {
   line-height: 1.25;
 }
 
-/* Cartes KPI effet Glass + Hover Glow */
 .kpi-card {
   position: relative;
   overflow: hidden;
@@ -423,7 +417,6 @@ body {
   color: var(--text-muted);
 }
 
-/* Panneau de filtres à droite */
 .sidebar {
   background: var(--bg-sidebar);
   backdrop-filter: blur(14px);
@@ -473,7 +466,6 @@ body {
   box-shadow: 0 0 0 3px var(--accent-brand-soft);
 }
 
-/* Barre de statut en bas */
 .status-bar {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
