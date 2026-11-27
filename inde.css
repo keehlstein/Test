@@ -560,4 +560,38 @@ body {
 /* Tablette */
 @media (max-width: 960px) {
   .main-layout {
-    grid-template-columns: minmax(0,
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar-status-stack {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .top-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .kpi-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .kpi-name,
+  .kpi-desc {
+    min-height: auto;
+  }
+
+  .sidebar-status-stack {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
