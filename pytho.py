@@ -1,10 +1,15 @@
 import dataiku
 import pandas as pd
-from flask import request, jsonify
+from flask import request, jsonify, Response
 
 # Chargement de la dataset gcl_data depuis le flow Dataiku
 dataset = dataiku.Dataset("gcl_data")
 df_raw = dataset.get_dataframe()
+
+# Folder et fichier logo GDO formaté
+LOGO_FOLDER_ID = "oJeEdZgy"
+LOGO_FILENAME = "logo_gdo_formatted.png"
+LOGO_MIMETYPE = "image/png"
 
 # Noms des colonnes de gcl_data (à adapter si besoin)
 COLS = {
@@ -93,6 +98,18 @@ def compute_kpi(df_scope: pd.DataFrame, df_flag_true: pd.DataFrame, label: str, 
         "sub_value": ok_count,
         "status": status,
     }
+
+
+@app.route("/api/logo", methods=["GET"])
+def get_logo():
+    """Sert l'image du logo GDO depuis le Managed Folder Dataiku."""
+    try:
+        folder = dataiku.Folder(LOGO_FOLDER_ID)
+        with folder.get_download_stream(LOGO_FILENAME) as f:
+            img_bytes = f.read()
+        return Response(img_bytes, mimetype=LOGO_MIMETYPE)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 404
 
 
 @app.route("/api/filters", methods=["GET"])
