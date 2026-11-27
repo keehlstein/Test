@@ -144,24 +144,26 @@ def get_kpis():
     # Périmètre global filtré
     df_global = df
 
-    # Périmètre labellisation : Applicability Labes == True, hors 'No label - Other Reasons'
+    # Périmètre labellisation : uniquement Applicability Labes == True
     if get_col(df, "app_label_flag") is not None:
-        df_app = df[series_true_or_false(df, "app_label_flag")]
+        df_label_scope = df[series_true_or_false(df, "app_label_flag")]
     else:
-        df_app = df.iloc[0:0]
-
-    s_final = get_col(df_app, "final_label")
-    if s_final is not None:
-        df_label_scope = df_app[s_final.astype(str).str.strip() != "No label - Other Reasons"]
-    else:
-        df_label_scope = df_app
+        df_label_scope = df.iloc[0:0]
 
     s_label_scope_final = get_col(df_label_scope, "final_label")
-    golden_mask = (
-        s_label_scope_final.astype(str).str.strip() == "Golden"
-        if s_label_scope_final is not None
-        else pd.Series(False, index=df_label_scope.index)
-    )
+    if s_label_scope_final is not None:
+        final_clean = s_label_scope_final.astype(str).str.strip()
+        assigned_mask = (
+            s_label_scope_final.notna()
+            & (final_clean != "")
+            & (final_clean.str.lower() != "nan")
+            & (final_clean.str.lower() != "none")
+        )
+        df_label_assigned = df_label_scope[assigned_mask]
+        golden_mask = final_clean == "Golden"
+    else:
+        df_label_assigned = df_label_scope.iloc[0:0]
+        golden_mask = pd.Series(False, index=df_label_scope.index)
 
     kpis = {
         "smvd": compute_kpi(
@@ -184,7 +186,7 @@ def get_kpis():
         ),
         "labelling_unassigned": compute_kpi(
             df_label_scope,
-            df_label_scope[series_true_or_false(df_label_scope, "label_flag")],
+            df_label_assigned,
             "Labelling Unassigned",
             "assigned",
         ),
