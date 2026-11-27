@@ -164,18 +164,48 @@ body {
   100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
+/* Petite animation subtile sur le titre */
+@keyframes titleEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 .top-header h1 {
   margin: 0;
   font-size: clamp(17px, 1.5vw, 20px);
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.15;
+  animation: titleEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .title-accent {
-  background: linear-gradient(90deg, var(--accent-brand), #3b82f6);
+  background: linear-gradient(90deg, var(--accent-brand), #3b82f6, var(--accent-brand));
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
+  animation: gradientShift 5s ease-in-out infinite;
+  transition: transform 0.25s ease;
+}
+
+.top-header:hover .title-accent {
+  transform: translateX(3px);
 }
 
 .subtitle {
@@ -244,7 +274,6 @@ body {
   align-items: stretch;
 }
 
-/* Chaque colonne a 1 header + 3 emplacements égaux pour une taille identique des cartes KPI */
 .kpi-col {
   height: 100%;
   min-height: 0;
@@ -287,7 +316,6 @@ body {
   line-height: 1.22;
 }
 
-/* Cartes KPI uniformes */
 .kpi-card {
   position: relative;
   overflow: hidden;
@@ -324,8 +352,8 @@ body {
 
 .kpi-top-accent.on_target { background: linear-gradient(90deg, var(--c-target), transparent); }
 .kpi-top-accent.warning { background: linear-gradient(90deg, var(--c-warning), transparent); }
-.kpi-top-accent.at_risk { background: linear-gradient(90deg, var(--c-risk), transparent); }
-.kpi-top-accent.na { background: linear-gradient(90deg, var(--c-warning), transparent); }
+.kpi-top-accent.at_risk,
+.kpi-top-accent.na { background: linear-gradient(90deg, var(--c-risk), transparent); }
 
 .kpi-name {
   font-size: 13px;
@@ -359,8 +387,9 @@ body {
 
 .kpi-pct.on_target { color: var(--c-target); }
 .kpi-pct.warning { color: var(--c-warning); }
-.kpi-pct.at_risk { color: var(--c-risk); }
-.kpi-pct.na, .na-text { color: var(--c-warning); }
+.kpi-pct.at_risk,
+.kpi-pct.na,
+.na-text { color: var(--c-risk); }
 
 .kpi-gauge {
   margin-bottom: 6px;
@@ -396,8 +425,8 @@ body {
 
 .gauge-fill.on_target { background: var(--c-target); }
 .gauge-fill.warning { background: var(--c-warning); }
-.gauge-fill.at_risk { background: var(--c-risk); }
-.gauge-fill.na { background: var(--c-warning); width: 0%; }
+.gauge-fill.at_risk,
+.gauge-fill.na { background: var(--c-risk); width: 0%; }
 
 .kpi-pct,
 .box-count {
@@ -431,8 +460,8 @@ body {
 
 .status-pill.on_target { color: var(--c-target); background: var(--c-target-bg); }
 .status-pill.warning { color: var(--c-warning); background: var(--c-warning-bg); }
-.status-pill.at_risk { color: var(--c-risk); background: var(--c-risk-bg); }
-.status-pill.na { color: var(--c-warning); background: var(--c-warning-bg); }
+.status-pill.at_risk,
+.status-pill.na { color: var(--c-risk); background: var(--c-risk-bg); }
 
 .trend-val {
   font-weight: 700;
@@ -440,7 +469,7 @@ body {
   text-align: right;
 }
 
-/* Sidebar droite — styles des filtres restaurés à l'identique */
+/* Sidebar droite */
 .sidebar {
   height: 100%;
   min-height: 0;
