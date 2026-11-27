@@ -6,7 +6,7 @@ const themeToggleBtn = document.getElementById("theme-toggle");
 const themeIcon = document.getElementById("theme-icon");
 const themeLabel = document.getElementById("theme-label");
 
-const ANIM_DURATION = 550;
+const ANIM_DURATION = 600;
 const animFrames = new Map();
 
 function applyTheme(theme) {
@@ -86,7 +86,7 @@ function animateNumber(el, targetValue, formatter, key) {
   function step(now) {
     const elapsed = now - startTime;
     const progress = Math.min(elapsed / ANIM_DURATION, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
+    const eased = 1 - Math.pow(1 - progress, 4);
     const current = startValue + (targetValue - startValue) * eased;
     el.textContent = formatter(current);
     if (progress < 1) {
@@ -135,15 +135,27 @@ async function refreshKpis() {
     const metaEl = document.getElementById(`meta-${key}`);
     const stEl = document.getElementById(`status-${key}`);
     const accentEl = document.getElementById(`accent-${key}`);
+    const gaugeEl = document.getElementById(`gauge-${key}`);
     if (!pctEl) return;
 
     pctEl.className = `kpi-pct ${kpi.status || ""}`;
     if (accentEl) accentEl.className = `kpi-top-accent ${kpi.status || ""}`;
 
     if (kpi.pct !== null && kpi.pct !== undefined && !Number.isNaN(Number(kpi.pct))) {
-      animateNumber(pctEl, Number(kpi.pct), formatFrenchPct, `pct-${key}`);
+      const numPct = Number(kpi.pct);
+      animateNumber(pctEl, numPct, formatFrenchPct, `pct-${key}`);
+      if (gaugeEl) {
+        gaugeEl.className = `gauge-fill ${kpi.status || ""}`;
+        requestAnimationFrame(() => {
+          gaugeEl.style.width = `${Math.max(0, Math.min(100, numPct))}%`;
+        });
+      }
     } else {
       pctEl.textContent = kpi.pct_display || "N/A%";
+      if (gaugeEl) {
+        gaugeEl.className = "gauge-fill na";
+        gaugeEl.style.width = "0%";
+      }
     }
 
     if (kpi.total !== null && kpi.total !== undefined) {
