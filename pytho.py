@@ -2,11 +2,11 @@ import dataiku
 import pandas as pd
 from flask import request, jsonify
 
-# 1. Chargement de la dataset gcl_data depuis le flow Dataiku
+# Chargement de la dataset gcl_data depuis le flow Dataiku
 dataset = dataiku.Dataset("gcl_data")
 df_raw = dataset.get_dataframe()
 
-# 2. Noms des colonnes de gcl_data (à adapter si besoin)
+# Noms des colonnes de gcl_data (à adapter si besoin)
 COLS = {
     "asset_id": "asset_id",
     "comm_type": "Community type",
@@ -21,6 +21,14 @@ COLS = {
 }
 
 
+def get_col(df: pd.DataFrame, key: str):
+    """Récupère une colonne en toute sécurité même si le nom n'existe pas."""
+    col_name = COLS.get(key)
+    if col_name and col_name in df.columns:
+        return df[col_name]
+    return None
+
+
 def is_true_series(s: pd.Series) -> pd.Series:
     """Renvoie True uniquement quand la valeur représente 'True' (booléen, texte ou 1)."""
     if s.dtype == bool:
@@ -28,12 +36,20 @@ def is_true_series(s: pd.Series) -> pd.Series:
     return s.astype(str).str.strip().str.lower().isin(["true", "1", "yes"])
 
 
+def series_true_or_false(df: pd.DataFrame, key: str) -> pd.Series:
+    """Retourne une série booléenne indexée sur df, ou False partout si colonne absente."""
+    s = get_col(df, key)
+    if s is None:
+        return pd.Series(False, index=df.index)
+    return is_true_series(s)
+
+
 def nunique_assets(df: pd.DataFrame) -> int:
     """Compte le nombre d'asset_id distincts (hors valeurs nulles)."""
-    col = COLS["asset_id"]
-    if df.empty or col not in df.columns:
+    s = get_col(df, "asset_id")
+    if df.empty or s is None:
         return 0
-    return int(df[col].dropna().nunique())
+    return int(s.dropna().nunique())
 
 
 def compute_kpi(df_scope: pd.DataFrame, df_flag_true: pd.DataFrame, label: str, sub_label: str):
@@ -86,31 +102,22 @@ def get_filters():
     comm_type = request.args.get("comm_type", "")
     community = request.args.get("community", "")
 
-    types = (
-        sorted(df[COLS["comm_type"]].dropna().unique().tolist())
-        if COLS["comm_type"] in df.columns
-        else []
-    )
+    s_type = get_col(df, "comm_type")
+    types = sorted(s_type.dropna().unique().tolist()) if s_type is not None else []
 
     df_t = df
-    if comm_type and comm_type != "__ALL__" and COLS["comm_type"] in df.columns:
-        df_t = df_t[df_t[COLS["comm_type"]] == comm_type]
+    if comm_type and comm_type != "__ALL__" and s_type is not None:
+        df_t = df_t[get_col(df_t, "comm_type") == comm_type]
 
-    communities = (
-        sorted(df_t[COLS["community"]].dropna().unique().tolist())
-        if COLS["community"] in df_t.columns
-        else []
-    )
+    s_comm = get_col(df_t, "community")
+    communities = sorted(s_comm.dropna().unique().tolist()) if s_comm is not None else []
 
     df_c = df_t
-    if community and community != "__ALL__" and COLS["community"] in df_t.columns:
-        df_c = df_c[df_c[COLS["community"]] == community]
+    if community and community != "__ALL__" and s_comm is not None:
+        df_c = df_c[get_col(df_c, "community") == community]
 
-    filieres = (
-        sorted(df_c[COLS["filiere"]].dropna().unique().tolist())
-        if COLS["filiere"] in df_c.columns
-        else []
-    )
+    s_fil = get_col(df_c, "filiere")
+    filieres = sorted(s_fil.dropna().unique().tolist()) if s_fil is not None else []
 
     return jsonify({
         "community_types": types,
@@ -127,65 +134,69 @@ def get_kpis():
     community = request.args.get("community", "")
     filiere = request.args.get("filiere", "")
 
-    # Application des 3 filtres de la barre latérale droite
-    if comm_type and comm_type != "__ALL__" and COLS["comm_type"] in df.columns:
-        df = df[df[COLS["comm_type"]] == comm_type]
-    if community and community != "__ALL__" and COLS["community"] in df.columns:
-        df = df[df[COLS["community"]] == community]
-    if filiere and filiere != "__ALL__" and COLS["filiere"] in df.columns:
-        df = df[df[COLS["filiere"]] == filiere]
+    if comm_type and comm_type != "__ALL__" and get_col(df, "comm_type") is not None:
+        df = df[get_col(df, "comm_type") == comm_type]
+    if community and community != "__ALL__" and get_col(df, "community") is not None:
+        df = df[get_col(df, "community") == community]
+    if filiere and filiere != "__ALL__" and get_col(df, "filiere") is not None:
+        df = df[get_col(df, "filiere") == filiere]
 
-    # Périmètre global filtré (pour Governance et Data Quality Rules)
+    # Périmètre global filtré
     df_global = df
 
-    # Périmètre labellisation : uniquement Applicability Labes == True,
-    # en excluant 'No label - Other Reasons' du dénominateur
-    if COLS["app_label_flag"] in df.columns:
-        df_app = df[is_true_series(df[COLS["app_label_flag"]])]
+    # Périmètre labellisation : Applicability Labes == True, hors 'No label - Other Reasons'
+    if get_col(df, "app_label_flag") is not None:
+        df_app = df[series_true_or_false(df, "app_label_flag")]
     else:
         df_app = df.iloc[0:0]
 
-    if COLS["final_label"] in df_app.columns:
-        df_label_scope = df_app[
-            df_app[COLS["final_label"]].astype(str).str.strip() != "No label - Other Reasons"
-        ]
+    s_final = get_col(df_app, "final_label")
+    if s_final is not None:
+        df_label_scope = df_app[s_final.astype(str).str.strip() != "No label - Other Reasons"]
     else:
         df_label_scope = df_app
+
+    s_label_scope_final = get_col(df_label_scope, "final_label")
+    golden_mask = (
+        s_label_scope_final.astype(str).str.strip() == "Golden"
+        if s_label_scope_final is not None
+        else pd.Series(False, index=df_label_scope.index)
+    )
 
     kpis = {
         "smvd": compute_kpi(
             df_global,
-            df_global[is_true_series(df_global[COLS["smvd_flag"]])],
+            df_global[series_true_or_false(df_global, "smvd_flag")],
             "Senior Management Missing Validation",
             "Date defined",
         ),
         "ddm": compute_kpi(
             df_global,
-            df_global[is_true_series(df_global[COLS["ddm_flag"]])],
+            df_global[series_true_or_false(df_global, "ddm_flag")],
             "DDM Unassigned",
             "assigned",
         ),
         "missing_dqr": compute_kpi(
             df_global,
-            df_global[is_true_series(df_global[COLS["dqr_flag"]])],
+            df_global[series_true_or_false(df_global, "dqr_flag")],
             "Missing Data Quality Rules",
             "defined",
         ),
         "labelling_unassigned": compute_kpi(
             df_label_scope,
-            df_label_scope[is_true_series(df_label_scope[COLS["label_flag"]])],
+            df_label_scope[series_true_or_false(df_label_scope, "label_flag")],
             "Labelling Unassigned",
             "assigned",
         ),
         "missing_labelling_req": compute_kpi(
             df_label_scope,
-            df_label_scope[is_true_series(df_label_scope[COLS["dqr_flag"]])],
+            df_label_scope[series_true_or_false(df_label_scope, "dqr_flag")],
             "Missing Labelling Requirements",
             "defined",
         ),
         "golden_not_reached": compute_kpi(
             df_label_scope,
-            df_label_scope[df_label_scope[COLS["final_label"]].astype(str).str.strip() == "Golden"],
+            df_label_scope[golden_mask],
             "Golden Label not reached",
             "Golden",
         ),
@@ -199,7 +210,6 @@ def get_kpis():
         },
     }
 
-    # Comptage des statuts pour la barre du bas
     summary = {"on_target": 0, "warning": 0, "at_risk": 0}
     for item in kpis.values():
         if item["status"] in summary:
