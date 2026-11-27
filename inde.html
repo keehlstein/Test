@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GCL Data Management KPI's - BCBS239 Critical Data</title>
+  <link rel="stylesheet" href="static/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- En-tête supérieur -->
+    <header class="top-header">
+      <div>
+        <h1>GCL Data Management KPI's - BCBS239 Critical Data</h1>
+        <p class="subtitle">Overview of the BCBS239 Critical Data application across key dimensions</p>
+      </div>
+      <div class="brand-badge">GDO <span>GROUP DATA OFFICE</span></div>
+    </header>
+
+    <!-- Zone principale : 4 colonnes KPI + Panneau de filtres à droite -->
+    <div class="main-layout">
+      <div class="kpi-grid">
+        <!-- Colonne 1 : Critical Data Governance -->
+        <section class="kpi-col">
+          <div class="col-header">
+            <div class="col-icon">🏛️</div>
+            <div class="col-title">Critical Data<br/>Governance</div>
+          </div>
+
+          <div class="kpi-card" id="card-smvd">
+            <div class="kpi-name">Senior Management Missing Validation</div>
+            <div class="kpi-desc">% of BCBS239 Critical Data without Senior Management Validation</div>
+            <div class="kpi-pct" id="pct-smvd">--,--%</div>
+            <div class="kpi-meta" id="meta-smvd">total: -<br/>Date defined: -</div>
+            <div class="kpi-footer">
+              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-smvd">-</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">+0.0%</div></div>
+            </div>
+          </div>
+
+          <div class="kpi-card" id="card-ddm">
+            <div class="kpi-name">DDM Unassigned</div>
+            <div class="kpi-desc">% of BCBS239 Critical Data without a Data Domain Manager assigned</div>
+            <div class="kpi-pct" id="pct-ddm">--,--%</div>
+            <div class="kpi-meta" id="meta-ddm">total: -<br/>assigned: -</div>
+            <div class="kpi-footer">
+              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-ddm">-</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">+0.0%</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Colonne 2 : Data Quality Rules Implementation -->
+        <section class="kpi-col">
+          <div class="col-header">
+            <div class="col-icon">📋</div>
+            <div class="col-title">Data Quality Rules<br/>Implementation</div>
+          </div>
+
+          <div class="kpi-card" id="card-missing_dqr">
+            <div class="kpi-name">Missing Data Quality Rules</div>
+            <div class="kpi-desc">% of BCBS239 Critical Data without Data Quality Rules defined in the local DQR Catalog</div>
+            <div class="kpi-pct" id="pct-missing_dqr">--,--%</div>
+            <div class="kpi-meta" id="meta-missing_dqr">total: -<br/>defined: -</div>
+            <div class="kpi-footer">
+              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-missing_dqr">-</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">+0.0%</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Colonne 3 : Critical Data Labelling -->
+        <section class="kpi-col">
+          <div class="col-header">
+            <div class="col-icon">🏷️</div>
+            <div class="col-title">Critical Data<br/>Labelling</div>
+          </div>
+
+          <div class="kpi-card" id="card-labelling_unassigned">
+            <div class="kpi-name">Labelling Unassigned</div>
+            <div class="kpi-desc">% of BCBS239 Critical Data with no final label assigned</div>
+            <div class="kpi-pct" id="pct-labelling_unassigned">--,--%</div>
+            <div class="kpi-meta" id="meta-labelling_unassigned">total: -<br/>assigned: -</div>
+            <div class="kpi-footer">
+              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-labelling_unassigned">-</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">+0.0%</div></div>
+            </div>
+          </div>
+
+          <div class="kpi-card" id="card-missing_labelling_req">
+            <div class="kpi-name">Missing Labelling Requirements</div>
+            <div class="kpi-desc">% of BCBS239 Critical Data with no labelling Data Quality Rule defined</div>
+            <div class="kpi-pct" id="pct-missing_labelling_req">--,--%</div>
+            <div class="kpi-meta" id="meta-missing_labelling_req">total: -<br/>defined: -</div>
+            <div class="kpi-footer">
+              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-missing_labelling_req">-</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">+0.0%</div></div>
+            </div>
+          </div>
+
+          <div class="kpi-card" id="card-golden_not_reached">
+            <div class="kpi-name">Golden Label not reached</div>
+            <div class="kpi-desc">% of BCBS239 Critical Data with a non-golden status assigned</div>
+            <div class="kpi-pct" id="pct-golden_not_reached">--,--%</div>
+            <div class="kpi-meta" id="meta-golden_not_reached">total: -<br/>Golden: -</div>
+            <div class="kpi-footer">
+              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-golden_not_reached">-</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">+0.0%</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Colonne 4 : Data Quality Issues Register -->
+        <section class="kpi-col">
+          <div class="col-header">
+            <div class="col-icon">⚠️</div>
+            <div class="col-title">Data Quality Issues<br/>Register</div>
+          </div>
+
+          <div class="kpi-card" id="card-dqi_not_updated">
+            <div class="kpi-name">Data Quality Issues not updated</div>
+            <div class="kpi-desc">% of issues with less than the 6 mandatory criteria updates for issues of BCBS239 Critical Data</div>
+            <div class="kpi-pct na-text" id="pct-dqi_not_updated">N/A%</div>
+            <div class="kpi-meta" id="meta-dqi_not_updated"></div>
+            <div class="kpi-footer">
+              <div><div class="foot-lbl">Status</div><div class="foot-val" id="status-dqi_not_updated">N/A</div></div>
+              <div><div class="foot-lbl">vs Q-1</div><div class="foot-val">N/A</div></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Panneau latéral droit : Content Exploration -->
+      <aside class="sidebar">
+        <div class="sidebar-title">Content Exploration</div>
+
+        <label class="filter-label" for="sel-comm-type">Choose your type</label>
+        <select id="sel-comm-type" class="filter-select">
+          <option value="__ALL__">(All)</option>
+        </select>
+
+        <label class="filter-label" for="sel-community">Choose a Business Line/Region/Filière</label>
+        <select id="sel-community" class="filter-select">
+          <option value="__ALL__">(All)</option>
+        </select>
+
+        <label class="filter-label" for="sel-filiere">Filter by Filière</label>
+        <select id="sel-filiere" class="filter-select">
+          <option value="__ALL__">(Tout)</option>
+        </select>
+      </aside>
+    </div>
+
+    <!-- Barre de résumé des statuts en bas -->
+    <footer class="status-bar">
+      <div class="status-box box-target">
+        <div>
+          <div class="box-title">ON TARGET</div>
+          <div class="box-range">0 to 5%</div>
+        </div>
+        <div class="box-count" id="count-on_target">0</div>
+      </div>
+
+      <div class="status-box box-warning">
+        <div>
+          <div class="box-title">WARNING</div>
+          <div class="box-range">6 to 10%</div>
+        </div>
+        <div class="box-count" id="count-warning">0</div>
+      </div>
+
+      <div class="status-box box-risk">
+        <div>
+          <div class="box-title">AT RISK</div>
+          <div class="box-range">&gt;10 %</div>
+        </div>
+        <div class="box-count" id="count-at_risk">0</div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="static/app.js"></script>
+</body>
+</html>
