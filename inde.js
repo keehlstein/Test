@@ -9,7 +9,6 @@ const themeLabel = document.getElementById("theme-label");
 const ANIM_DURATION = 550;
 const animFrames = new Map();
 
-/* --- Gestion du thème Dark / Light --- */
 function applyTheme(theme) {
   const isDark = theme === "dark";
   document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
@@ -34,7 +33,6 @@ try {
   }
 } catch (e) {}
 
-/* --- Utilitaires & API --- */
 function showDebug(msg, isError = true) {
   let box = document.getElementById("webapp-debug-box");
   if (!box) {
@@ -234,6 +232,9 @@ selFil.addEventListener("change", async () => {
 });
 
 (async function init() {
+  const logoEl = document.getElementById("gdo-logo");
+  if (logoEl) logoEl.src = buildBackendUrl("api/logo");
+
   try {
     const fData = await fetchJson("api/filters");
     fillSelect(selType, fData.community_types, "(All)", "Business Line");
